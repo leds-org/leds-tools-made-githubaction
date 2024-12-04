@@ -1,0 +1,45 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diretórios gerados
+dist/
+node_modules/
+
+# Dependências locais
+.env
+.env.local
+.env.*.local
+
+# Configurações do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Cache do TypeScript
+*.tsbuildinfo
+
+# Configurações do editor
+.idea/
+.vscode/
+*.swp
+
+# Saída do Docker
+docker-compose.override.yml
+*.pid
+*.seed
+
+# Arquivos de teste e cobertura
+coverage/
+*.lcov
+
+# Arquivos de bloqueio
+package-lock.json
+yarn.lock
+
+# Ignorar artefatos do GitHub Actions
+.github/workflows/*.bak
+
+# Ignorar qualquer
