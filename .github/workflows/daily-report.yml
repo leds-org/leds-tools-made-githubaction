@@ -1,0 +1,46 @@
+name: Daily Report
+
+on:
+  schedule:
+    - cron: '0 18 * * *' # Todos os dias às 18 horas (UTC)
+  workflow_dispatch: # Permite disparar manualmente
+
+jobs:
+  daily-report-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Passo 1: Checkout do repositório
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      # Passo 2: Configurar Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # Passo 3: Instalar dependências do projeto
+      - name: Install project dependencies
+        run: npm install
+
+      # Passo 4: Instalar a biblioteca made-report-lib
+      - name: Install made-report-lib
+        run: npm install made-report-lib
+
+      # Passo 5: Compilar o código TypeScript
+      - name: Compile TypeScript
+        run: npx tsc
+
+      # Passo 6: Executar o script compilado
+      - name: Run the report script
+        run: node ./dist/scripts/daily-report.js
+
+      # Passo 7: Commit e push de alterações
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Daily report update - $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          git push
