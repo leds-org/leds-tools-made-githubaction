@@ -34,7 +34,7 @@ jobs:
 
       # Passo 6: Executar o script compilado
       - name: Run the report script
-        run: node ./dist/scripts/daily-report.js
+        run: node --loader ts-node/esm ./src/scripts/daily-report.ts
 
       # Passo 7: Commit e push de alterações
       - name: Commit and push changes

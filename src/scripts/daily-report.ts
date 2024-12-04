@@ -7,4 +7,4 @@ export function generateReport(): void {
 }
 
 // Executar a função
-generateReport()
+generateReport();
