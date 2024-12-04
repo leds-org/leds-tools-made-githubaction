@@ -1,9 +1,9 @@
 name: Daily Report
 
 on:
-  schedule:
-    - cron: '0 18 * * *' # Todos os dias às 18 horas (UTC)
-  workflow_dispatch: # Permite disparar manualmente
+    push: # Executar em qualquer push
+      branches:
+        - main # Substitua 'main' pelo nome do branch desejado, se necessário
 
 jobs:
   daily-report-job:
