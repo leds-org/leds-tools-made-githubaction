@@ -29,7 +29,7 @@ jobs:
       - name: Run MADE Report Container
         run: |
           docker run -v ${{ github.workspace }}/config:/app/config \
-                    -v ${{ github.workspace }}/example:/host \
+                    -v ${{ github.workspace }}:/host \
                     -e JSON_FILE_PATH=/app/config/directories.json \
                     -e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
                     ghcr.io/leds-org/leds-tools-made-docker:main
