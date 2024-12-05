@@ -14,8 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Create config directory
-        run: mkdir -p config
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Run MADE Report Container
         run: |
