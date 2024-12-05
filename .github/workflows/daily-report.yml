@@ -8,12 +8,14 @@ on:
 jobs:
   generate-report:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    permissions: 
+        contents: write
+        packages: read
+        actions: read
     
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -26,6 +28,7 @@ jobs:
           docker run -v ${{ github.workspace }}/config:/app/config \
                     -v ${{ github.workspace }}/example:/host \
                     -e JSON_FILE_PATH=/app/config/directories.json \
+                    -e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
                     ghcr.io/leds-org/leds-tools-made-docker:main
       
       - name: Commit and Push Changes
