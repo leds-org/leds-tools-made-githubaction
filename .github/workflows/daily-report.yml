@@ -3,6 +3,12 @@ name: MADE Report Generation
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'example/**'
+  schedule:
+    - cron: '0 9 * * *'
+    - cron: '0 12 * * *'
+    - cron: '0 18 * * *'
   workflow_dispatch:
 
 jobs:
