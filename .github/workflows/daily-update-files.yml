@@ -1,4 +1,4 @@
-name: MADE Report Generation
+name: Update MADE Report Generation
 
 on:
   push:
