@@ -2,12 +2,16 @@
 
 Docker container for generating MADE reports from specified directories.
 
-## Automated Reports Generation
+## Automated Workflows
 
-Reports are automatically generated:
+### MADE Report Generation
 - Daily at 9:00, 12:00, and 18:00
-- When changes are pushed to the `example/` directory
+- When changes are pushed to `example/` directory
 - Manually via GitHub Actions dispatch
+
+### Discord Notifications
+- Daily status update at 15:00
+- Setup requires Discord webhook added to repository secrets as `DISCORD_WEBHOOK`
 
 ## GitHub Actions Setup
 
@@ -33,7 +37,6 @@ jobs:
         contents: write
         packages: read
         actions: read
-    
     steps:
       - uses: actions/checkout@v4
       - name: Login to GitHub Container Registry
@@ -42,7 +45,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
       - name: Pull and Run Docker
         run: |
           docker pull ghcr.io/leds-org/leds-tools-made-docker:main
@@ -53,15 +55,26 @@ jobs:
                     ghcr.io/leds-org/leds-tools-made-docker:main
 ```
 
-2. Required Repository Settings:
-   - Enable Actions in repository settings
-   - Grant write permissions to workflows
-   - Set up `GITHUB_TOKEN` with appropriate scopes
+2. Create `.github/workflows/discord-notify.yml`:
+```yaml
+name: Discord Daily Notification
 
-3. Manual Trigger:
-   - Go to Actions tab
-   - Select "MADE Report Generation"
-   - Click "Run workflow"
+on:
+  schedule:
+    - cron: '0 15 * * *'
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'Daily MADE Report Status Update'
+```
 
 ## Local Setup
 
@@ -86,23 +99,30 @@ services:
       - /path/to/your/files:/host
 ```
 
-## Volume Mapping
+## Required Configurations
 
+### Repository Settings
+- Enable Actions
+- Grant write permissions to workflows
+- Set up `GITHUB_TOKEN`
+- Add Discord webhook URL as `DISCORD_WEBHOOK` secret
+
+### Volume Mapping
 - `/app/config`: Configuration directory
 - `/host`: Base directory for source files
 
-## Environment Variables
-
+### Environment Variables
 - `JSON_FILE_PATH`: Path to directories configuration file
-- `GITHUB_TOKEN`: GitHub authentication token (for Actions)
+- `GITHUB_TOKEN`: GitHub authentication token
+- `DISCORD_WEBHOOK`: Discord webhook URL
 
 ## Directory Structure
-
 ```
 .
 ├── .github/
 │   └── workflows/
-│       └── made-report.yml
+│       ├── made-report.yml
+│       └── discord-notify.yml
 ├── config/
 │   └── directories.json
 └── docker-compose.yml
