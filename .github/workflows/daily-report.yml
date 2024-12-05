@@ -1,46 +1,33 @@
-name: Daily Report
+name: MADE Report Generation
 
 on:
-    push: # Executar em qualquer push
-      branches:
-        - main # Substitua 'main' pelo nome do branch desejado, se necessário
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
-  daily-report-job:
+  generate-report:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
+    
     steps:
-      # Passo 1: Checkout do repositório
-      - name: Check out repository
-        uses: actions/checkout@v3
-
-      # Passo 2: Configurar Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      # Passo 3: Instalar dependências do projeto
-      - name: Install project dependencies
-        run: npm install
-
-      # Passo 4: Instalar a biblioteca made-report-lib
-      - name: Install made-report-lib
-        run: npm install made-report-lib
-
-      # Passo 5: Compilar o código TypeScript
-      - name: Compile TypeScript
-        run: npx tsc
-
-      # Passo 6: Executar o script compilado
-      - name: Run the report script
-        run: node --loader ts-node/esm ./src/scripts/daily-report.ts
-
-      # Passo 7: Commit e push de alterações
-      - name: Commit and push changes
+      - uses: actions/checkout@v4
+      
+      - name: Create config directory
+        run: mkdir -p config
+      
+      - name: Run MADE Report Container
         run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          docker run -v ${{ github.workspace }}/config:/app/config \
+                    -v ${{ github.workspace }}/example:/host \
+                    -e JSON_FILE_PATH=/app/config/directories.json \
+                    ghcr.io/leds-org/leds-tools-made-docker:main
+      
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
-          git commit -m "Daily report update - $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          git commit -m "Update MADE reports" || echo "No changes to commit"
           git push
