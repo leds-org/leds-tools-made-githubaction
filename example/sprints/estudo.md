@@ -17,7 +17,7 @@
       
         # Análise de Dependências do Sprint
 
-Análise gerada em: 05/12/2024, 18:31:22
+Análise gerada em: 06/12/2024, 09:12:17
 
 ## 🔍 Grafo de Dependências
 
@@ -59,8 +59,8 @@ graph BT
 ## ✅ SPRINT PROVAVELMENTE SERÁ CONCLUÍDA NO PRAZO
 
 - **Probabilidade de conclusão no prazo**: 100.0%
-- **Data mais provável de conclusão**: sáb., 07/12/2024
-- **Dias em relação ao planejado**: 7 dias
+- **Data mais provável de conclusão**: ter., 10/12/2024
+- **Dias em relação ao planejado**: 10 dias
 - **Status**: ❌ Atraso Crítico
 
 ### 📊 Métricas Críticas
@@ -76,7 +76,7 @@ graph BT
 
 | Data | Probabilidade | Status | Observação |
 |------|---------------|---------|------------|
-| sáb., 07/12/2024 | 100.0% | ❌ Atraso Crítico | 📍 Data mais provável |
+| ter., 10/12/2024 | 100.0% | ❌ Atraso Crítico | 📍 Data mais provável |
 
 ### 📋 Status das Tarefas
 
@@ -101,5 +101,5 @@ graph BT
 - **Simulações Realizadas**: 10,000
 
 ---
-*Relatório gerado em 05/12/2024, 18:31:22*
+*Relatório gerado em 06/12/2024, 09:12:17*
         
