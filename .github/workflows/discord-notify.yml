@@ -2,7 +2,7 @@ name: Discord Daily Notification
 
 on:
   schedule:
-    - cron: '0 13 * * *'
+    - cron: '0 12 * * *'
   workflow_dispatch:
 
 jobs:
@@ -14,4 +14,8 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: 'Daily MADE Report Status Update'
+          args: |
+            Ontem eu fiz:
+            Hoje vou focar em:
+            Bloqueios:
+            [✅=Feito][🟨=Fazendo][🟫=Não trabalhado]
