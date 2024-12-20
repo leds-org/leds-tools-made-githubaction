@@ -2,7 +2,7 @@ name: Discord Daily Notification
 
 on:
   schedule:
-    - cron: '0 12 * * *'
+    - cron: '20 13 * * 1-5' # Todos os dias de segunda a sexta-feira às 13:20
   workflow_dispatch:
 
 jobs:
