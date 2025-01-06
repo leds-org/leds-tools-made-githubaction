@@ -25,10 +25,7 @@ jobs:
         uses: Ilshidur/action-discord@master
         with:
           args: |
-            **Ontem eu fiz:**
-
-            **Hoje vou focar em:**
-            
-            **Bloqueios:**
-            
+            - **Ontem eu fiz:**
+            - **Hoje vou focar em:**
+            - **Bloqueios:**
             [✅ = Feito] [🟨 = Fazendo] [🟥 = Não trabalhado]
