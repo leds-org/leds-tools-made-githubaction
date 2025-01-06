@@ -2,7 +2,7 @@ name: Discord Daily Notification
 
 on:
   schedule:
-    - cron: '20 13 * * 1-5' # Todos os dias de segunda a sexta-feira às 13:20
+    - cron: '00 08 * * 1-5' # Todos os dias de segunda a sexta-feira às 08:00
   workflow_dispatch:
 
 jobs:
@@ -15,18 +15,20 @@ jobs:
         uses: Ilshidur/action-discord@master
         with:
           args: |
-            Ontem eu fiz:
-            Hoje vou focar em:
-            Bloqueios:
-            [✅=Feito][🟨=Fazendo][🟫=Não trabalhado]
-      - name: Discord notification BI
+            - **Ontem eu fiz:**
+            - **Hoje vou focar em:**
+            - **Bloqueios:**
+            [✅ = Feito] [🟨 = Fazendo] [🟥 = Não trabalhado]
+      - name: Discord notification QA
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_BI }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_QA }}
         uses: Ilshidur/action-discord@master
         with:
           args: |
-            Ontem eu fiz:
-            Hoje vou focar em:
-            Bloqueios:
-            [✅=Feito][🟨=Fazendo][🟫=Não trabalhado]
-     
+            **Ontem eu fiz:**
+
+            **Hoje vou focar em:**
+            
+            **Bloqueios:**
+            
+            [✅ = Feito] [🟨 = Fazendo] [🟥 = Não trabalhado]
