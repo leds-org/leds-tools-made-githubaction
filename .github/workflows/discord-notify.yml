@@ -39,3 +39,13 @@ jobs:
             - **Hoje vou focar em:**
             - **Bloqueios:**
             [✅ = Feito] [🟨 = Fazendo] [🟥 = Não trabalhado]
+      - name: Discord notification Squad Blue
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_SQUAD_BLUE }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: |
+            - **Ontem eu fiz:**
+            - **Hoje vou focar em:**
+            - **Bloqueios:**
+            [✅ = Feito] [🟨 = Fazendo] [🟥 = Não trabalhado]
