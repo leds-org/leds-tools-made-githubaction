@@ -6,7 +6,7 @@ on:
     paths:
       - 'example/**'
   schedule:
-    - cron: '0 18 * * *'
+    - cron: '00 18 * * 1-5' # Todos os dias de segunda a sexta-feira às 08:00
   workflow_dispatch:
 
 jobs:
