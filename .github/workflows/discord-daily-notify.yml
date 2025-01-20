@@ -9,16 +9,16 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Discord notification QA
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_QA }}
-        uses: Ilshidur/action-discord@master
-        with:
-          args: |
-            - **Ontem eu fiz:**
-            - **Hoje vou focar em:**
-            - **Bloqueios:**
-            [✅ = Feito] [🟨 = Fazendo] [🟥 = Não trabalhado]
+      # - name: Discord notification QA
+      #   env:
+      #     DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_QA }}
+      #   uses: Ilshidur/action-discord@master
+      #   with:
+      #     args: |
+      #       - **Ontem eu fiz:**
+      #       - **Hoje vou focar em:**
+      #       - **Bloqueios:**
+      #       [✅ = Feito] [🟨 = Fazendo] [🟥 = Não trabalhado]
       - name: Discord notification BI
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_BI }}
