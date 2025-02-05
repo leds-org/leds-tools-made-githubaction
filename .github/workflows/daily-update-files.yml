@@ -1,47 +1,47 @@
-name: Update MADE Report Generation
+# name: Update MADE Report Generation
 
-on:
-  push:
-    branches: [ "main" ]
-    paths:
-      - 'example/**'
-  schedule:
-    - cron: '00 21 * * 1-5' # Todos os dias de segunda a sexta-feira às 08:00
-  workflow_dispatch:
+# on:
+#   push:
+#     branches: [ "main" ]
+#     paths:
+#       - 'example/**'
+#   schedule:
+#     - cron: '00 21 * * 1-5' # Todos os dias de segunda a sexta-feira às 08:00
+#   workflow_dispatch:
 
-jobs:
-  generate-report:
-    runs-on: ubuntu-latest
-    permissions: 
-        contents: write
-        packages: read
-        actions: read
+# jobs:
+#   generate-report:
+#     runs-on: ubuntu-latest
+#     permissions: 
+#         contents: write
+#         packages: read
+#         actions: read
     
-    steps:
-      - uses: actions/checkout@v4
+#     steps:
+#       - uses: actions/checkout@v4
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+#       - name: Login to GitHub Container Registry
+#         uses: docker/login-action@v3
+#         with:
+#           registry: ghcr.io
+#           username: ${{ github.actor }}
+#           password: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Pull Docker image
-        run: docker pull ghcr.io/leds-org/leds-tools-made-docker:main
+#       - name: Pull Docker image
+#         run: docker pull ghcr.io/leds-org/leds-tools-made-docker:main
       
-      - name: Run MADE Report Container
-        run: |
-          docker run -v ${{ github.workspace }}/config:/app/config \
-                    -v ${{ github.workspace }}:/host \
-                    -e JSON_FILE_PATH=/app/config/directories.json \
-                    -e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
-                    ghcr.io/leds-org/leds-tools-made-docker:main
+#       - name: Run MADE Report Container
+#         run: |
+#           docker run -v ${{ github.workspace }}/config:/app/config \
+#                     -v ${{ github.workspace }}:/host \
+#                     -e JSON_FILE_PATH=/app/config/directories.json \
+#                     -e GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
+#                     ghcr.io/leds-org/leds-tools-made-docker:main
       
-      - name: Commit and Push Changes
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .
-          git commit -m "Update MADE reports" || echo "No changes to commit"
-          git push
+#       - name: Commit and Push Changes
+#         run: |
+#           git config --global user.name 'github-actions[bot]'
+#           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+#           git add .
+#           git commit -m "Update MADE reports" || echo "No changes to commit"
+#           git push
