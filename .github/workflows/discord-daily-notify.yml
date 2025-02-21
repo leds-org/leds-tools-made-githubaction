@@ -19,16 +19,16 @@ jobs:
       #       - **Hoje vou focar em:**
       #       - **Bloqueios:**
       #       [✅ = Feito] [🟨 = Fazendo] [🟥 = Não trabalhado]
-      - name: Discord notification BI
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_BI }}
-        uses: Ilshidur/action-discord@master
-        with:
-          args: |
-            - **Ontem eu fiz:**
-            - **Hoje vou focar em:**
-            - **Bloqueios:**
-            [✅ = Feito] [🟨 = Fazendo] [🟥 = Não trabalhado]
+      # - name: Discord notification BI
+      #   env:
+      #     DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_BI }}
+      #   uses: Ilshidur/action-discord@master
+      #   with:
+      #     args: |
+      #       - **Ontem eu fiz:**
+      #       - **Hoje vou focar em:**
+      #       - **Bloqueios:**
+      #       [✅ = Feito] [🟨 = Fazendo] [🟥 = Não trabalhado]
       - name: Discord notification Squad Blue
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_SQUAD_BLUE }}
@@ -49,13 +49,13 @@ jobs:
             - **Hoje vou focar em:**
             - **Bloqueios:**
             [✅ = Feito] [🟨 = Fazendo] [🟥 = Não trabalhado]                  
-      - name: Discord notification Squad Purple (IA)
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_IA }}
-        uses: Ilshidur/action-discord@master
-        with:
-          args: |
-            - **Ontem eu fiz:**
-            - **Hoje vou focar em:**
-            - **Bloqueios:**
-            [✅ = Feito] [🟨 = Fazendo] [🟥 = Não trabalhado]                  
+      # - name: Discord notification Squad Purple (IA)
+      #   env:
+      #     DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_IA }}
+      #   uses: Ilshidur/action-discord@master
+      #   with:
+      #     args: |
+      #       - **Ontem eu fiz:**
+      #       - **Hoje vou focar em:**
+      #       - **Bloqueios:**
+      #       [✅ = Feito] [🟨 = Fazendo] [🟥 = Não trabalhado]                  
